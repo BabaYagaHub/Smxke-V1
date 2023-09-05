@@ -11,8 +11,6 @@ local key = "SmxkeGotBlitzed"
 
 local HWID;
 
-local good, errormessage = pcall(function()
-
 local http_request = (syn and syn.request) or http_request or request or httprequest or httpRequest or Request;
 
 local body = http_request({Url = 'https://httpbin.org/get'; Method = 'GET'}).Body;
@@ -23,18 +21,13 @@ for i,v in pairs(headers) do
 	if type(i)=="string" and i:lower():match("fingerprint") then HWID = v end
 end
 
-end)
-
-
 local function checkForPaidAccess()
-	local success, errormessage = pcall(function()
-		local whitelist = loadstring(game:HttpGet("https://pastebin.com/raw/gdnErqGd"))()
+	local whitelist = loadstring(game:HttpGet("https://pastebin.com/raw/gdnErqGd"))()
 	for _, whitelistedhardware in pairs(whitelist) do
 		if whitelistedhardware == HWID then
 		return true
 		end
 	end
-	end)
 
 	if not success then
 		return false
